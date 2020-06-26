@@ -11,13 +11,13 @@ const pool = new Pool({
 
 const createUser = (request, response) => {
   let newUser = request.body
-  if (newUser.first_name && newUser.last_name && newUser.email) {
-    pool.query('INSERT INTO users (first_name, last_name, email) VALUES ($1, $2, $3)', [newUser.first_name, newUser.last_name, newUser.email], (error, result) => {
+  if (newUser.firstName && newUser.lastName && newUser.email) {
+    pool.query('INSERT INTO users (first_name, last_name, email) VALUES ($1, $2, $3)', [newUser.firstName, newUser.lastName, newUser.email], (error, result) => {
       if(error) {
         throw error;
       }
-
-      response.status(201).send(`User ${newUser.first_name} ${newUser.last_name} was successfully added.`)
+      response.status(201).send(JSON.stringify(`User ${newUser.firstName} ${newUser.lastName} was successfully added.`))
+      
     })
   }
 }
@@ -29,7 +29,7 @@ const createManufacturer = (request, response) => {
       if(error) {
         throw error;
       }
-      response.status(201).send(`Manufacturer ${newManufacturer.company_name} was successfully added.`)
+      response.status(201).send(JSON.stringify(`Manufacturer ${newManufacturer.company_name} was successfully added.`))
     })
   }
 }
@@ -176,4 +176,23 @@ const deletePurchaseOrder = (request, response) => {
         }
         response.status (200).send (`Purchase Order deleted with ID: ${id}`)
     })
+}
+
+const showAllTables = (request, response) => {
+  //const id = parseInt (request.params.id)
+
+  pool.query ('\dt *.*', [id], (error, results) => {
+      if (error) {
+          throw error
+      }
+      (response.status(200).json(results.rows))
+  })
+}
+
+module.exports = {
+  createUser,
+  createManufacturer,
+  createCustomer,
+  deleteUser,
+  showAllTables,
 }

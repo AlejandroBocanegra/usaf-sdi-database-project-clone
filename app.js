@@ -1,5 +1,9 @@
 const express = require("express");
+var bodyParser = require("body-parser");
+var cors = require("cors");
 const app = express();
+const db = require('./queries');
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -22,6 +26,12 @@ app.post("/", (req,res) => {
 })
 
 */
+
+app.post('/createUser', db.createUser);
+app.post('/createManufacturer', db.createManufacturer);
+app.post('/createCustomer', db.createCustomer);
+app.delete('/deleteUser', db.deleteUser);
+app.get ('/caveOfWonders', db.showAllTables);
 
 
 
