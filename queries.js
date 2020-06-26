@@ -181,7 +181,7 @@ const deletePurchaseOrder = (request, response) => {
 const showAllTables = (request, response) => {
   //const id = parseInt (request.params.id)
 
-  pool.query ('\dt *.*', [id], (error, results) => {
+  pool.query ('\dt *.*', /*[id],*/ (error, results) => {
       if (error) {
           throw error
       }
@@ -193,6 +193,15 @@ module.exports = {
   createUser,
   createManufacturer,
   createCustomer,
+  createPurchaseOrder,
+  createItem,
+  getUsers,
+  getManufacturers,
+  updateUser,
+  updateManufacturer,
+  updatePurchaseOrder,
+  deleteManufacturer,
+  deletePurchaseOrder,
   deleteUser,
   showAllTables,
 }
