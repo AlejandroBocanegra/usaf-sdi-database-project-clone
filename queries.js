@@ -41,7 +41,7 @@ const createCustomer = (request, response) => {
       if(error) {
         throw error;
       }
-      response.status(201).send(`Customer ${newCustomer.company_name} was successfully added.`)
+      response.status(201).send(JSON.stringify(`Customer ${newCustomer.company_name} was successfully added.`))
     })
   }
 }
@@ -53,7 +53,7 @@ const createItem = (request, response) => {
       if (error) {
         throw error;
       }
-      response.status(201).send(`New item ${newItem.name} was added.`)
+      response.status(201).send(JSON.stringify(`New item ${newItem.name} was added.`))
     })
   }
 }
@@ -71,7 +71,7 @@ const createPurchaseOrder = (request, response) => {
           if (error) {
             throw error
           }
-          response.status(201).send(`New purchase order with purchase order number of ${poNum} was created.`)
+          response.status(201).send(JSON.stringify(`New purchase order with purchase order number of ${poNum} was created.`))
         })
       })
     })
@@ -108,7 +108,7 @@ const updateUser = (resquest, response) => {
             if (error) {
                 throw error
             }
-            response.status(200).send (`User modified with ID: ${id}`)
+            response.status(200).send (JSON.stringify(`User modified with ID: ${id}`))
         }
     )
 }
@@ -124,7 +124,7 @@ const updateManufacturer = (resquest, response) => {
             if (error) {
                 throw error
             }
-            response.status(200).send (`Manufacturer modified with ID: ${id}`)
+            response.status(200).send (JSON.stringify(`Manufacturer modified with ID: ${id}`))
         }
     )
 }
@@ -140,7 +140,7 @@ const updatePurchaseOrder = (resquest, response) => {
             if (error) {
                 throw error
             }
-            response.status(200).send (`Manufacturer modified with ID: ${id}`)
+            response.status(200).send (JSON.stringify(`Manufacturer modified with ID: ${id}`))
         }
     )
 }
@@ -152,7 +152,7 @@ const deleteUser = (request, response) => {
         if (error) {
             throw error
         }
-        response.status (200).send (`User deleted with ID: ${id}`)
+        response.status (200).send (JSON.stringify(`User deleted with ID: ${id}`))
     })
 }
 
@@ -163,7 +163,7 @@ const deleteManufacturer = (request, response) => {
         if (error) {
             throw error
         }
-        response.status (200).send (`Manufacturer deleted with ID: ${id}`)
+        response.status (200).send (JSON.stringify(`Manufacturer deleted with ID: ${id}`))
     })
 }
 
@@ -174,14 +174,70 @@ const deletePurchaseOrder = (request, response) => {
         if (error) {
             throw error
         }
-        response.status (200).send (`Purchase Order deleted with ID: ${id}`)
+        response.status (200).send (JSON.stringify(`Purchase Order deleted with ID: ${id}`))
     })
 }
 
-const showAllTables = (request, response) => {
+const showUsersTable = (request, response) => {
   //const id = parseInt (request.params.id)
 
-  pool.query ('\dt *.*', /*[id],*/ (error, results) => {
+  pool.query ('SELECT * FROM users;', /*[id],*/ (error, results) => {
+      if (error) {
+          throw error
+      }
+      (response.status(200).json(results.rows))
+  })
+}
+
+const showCustomersTable = (request, response) => {
+  //const id = parseInt (request.params.id)
+
+  pool.query ('SELECT * FROM customers;', /*[id],*/ (error, results) => {
+      if (error) {
+          throw error
+      }
+      (response.status(200).json(results.rows))
+  })
+}
+
+const showItemsTable = (request, response) => {
+  //const id = parseInt (request.params.id)
+
+  pool.query ('SELECT * FROM items;', /*[id],*/ (error, results) => {
+      if (error) {
+          throw error
+      }
+      (response.status(200).json(results.rows))
+  })
+}
+
+const showitems_purchordersTable = (request, response) => {
+  //const id = parseInt (request.params.id)
+
+  pool.query ('SELECT * FROM items_purchorders;', /*[id],*/ (error, results) => {
+      if (error) {
+          throw error
+      }
+      (response.status(200).json(results.rows))
+  })
+
+}
+
+const showManfacturersTable = (request, response) => {
+  //const id = parseInt (request.params.id)
+
+  pool.query ('SELECT * FROM manufacturers;', /*[id],*/ (error, results) => {
+      if (error) {
+          throw error
+      }
+      (response.status(200).json(results.rows))
+  })
+}
+
+const showpurchase_ordersTable = (request, response) => {
+  //const id = parseInt (request.params.id)
+
+  pool.query ('SELECT * FROM purchase_orders;', /*[id],*/ (error, results) => {
       if (error) {
           throw error
       }
@@ -203,5 +259,10 @@ module.exports = {
   deleteManufacturer,
   deletePurchaseOrder,
   deleteUser,
-  showAllTables,
+  showUsersTable,
+  showCustomersTable,
+  showItemsTable,
+  showitems_purchordersTable,
+  showManfacturersTable,
+  showpurchase_ordersTable, 
 }

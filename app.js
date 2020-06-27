@@ -13,7 +13,7 @@ app.use(
 
 /* Get boilerplate:
 
-app.get("/", (req,res) => {
+app.get"/", (req,res) => {
 
 })
 ?query - req.query.[KEY]
@@ -27,13 +27,34 @@ app.post("/", (req,res) => {
 
 */
 
+// Create
 app.post('/createUser', db.createUser);
 app.post('/createManufacturer', db.createManufacturer);
 app.post('/createCustomer', db.createCustomer);
+app.post('/createPurchaseOrder', db.createPurchaseOrder);
+app.post('/createItem', db.createItem);
+
+// Read
+app.get('/getUsers', db.getUsers);
+app.get('/getManufacturers', db.getManfacturers);
+
+// Update
+app.post('/updateUser', db.updateUser);
+app.post('/updateManufacturer', db.updateManufacturer);
+app.post('/updateCustomer', db.updateCustomer);
+
+// Delete
 app.delete('/deleteUser', db.deleteUser);
-app.get ('/caveOfWonders', db.showAllTables);
+app.delete('/deleteManufacturer', db.deleteManufacturer);
+app.delete('/deletePurchaseOrder', db.deletePurchaseOrder);
 
-
+// List
+app.get('/caveOfUsers', db.showUsersTable);
+app.get('/caveOfCustomers', db.showCustomersTable);
+app.get('/caveOfItems', db.showItemsTable);
+app.get('/caveOfItemsPurchaseOrders', db.showitems_purchordersTable );
+app.get('/caveOfManufacturers', db.showManfacturersTable);
+app.get('/caveOfWonders', db.showpurchase_ordersTable );
 
 const port = 9000;
 app.listen(port, () => 
