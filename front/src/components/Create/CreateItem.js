@@ -33,24 +33,24 @@ async function postData(url = "", data = {}) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-const CreateManufacturer = ({name}) => {
+const CreateItem = () => {
   const classes = useStyles();
 
-  const [user, setuser] = useState(0);
+  const [item, setitem] = useState(0);
   const [open, setOpen] = React.useState(false);
-  const [status, setstatus] = useState(false);
+  const [status, setstatus] = useState(false)
 
   let onChange = (e) => {
     let id = e.target.id;
-    let newValue = { ...user, [`${id}`]: e.target.value.trim() };
-    setuser(newValue);
+    let newValue = { ...item, [`${id}`]: e.target.value.trim() };
+    setitem(newValue);
   };
 
   let submitTextfields = () => {
-    if (typeof user === "object") {
-      postData(`http://localhost:9000/create${name}`, user).then((data) => {
+    if (typeof item === "object") {
+      postData("http://localhost:9000/createItem", item).then((data) => {
         console.log(data); // JSON data parsed by `data.json()` call
-        setstatus(data);
+        setstatus(data)
         setOpen(true);
       });
     }
@@ -66,13 +66,11 @@ const CreateManufacturer = ({name}) => {
   return (
     <React.Fragment>
       <Paper elevation={6}>
-        <Typography variant="h6">Create {name}:</Typography>
+        <Typography variant="h6">Create item:</Typography>
       </Paper>
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="company_name" label="Name" onChange={onChange} />
-        <TextField id="contact_email" label="Email" onChange={onChange} />
-        <TextField id="contact_person" label="Person" onChange={onChange} />
-        <TextField id="contact_phone" label="Phone" onChange={onChange} />
+        <TextField id="firstName" label="First Name" onChange={onChange} />
+        <TextField id="lastName" label="Last Name" onChange={onChange} />
         <Button
           variant="contained"
           color="primary"
@@ -91,4 +89,4 @@ const CreateManufacturer = ({name}) => {
   );
 };
 
-export default CreateManufacturer;
+export default CreateItem;

@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-async function postData(url = "", data = {}, method = "POST") {
+async function postData(url = "", data = {}) {
   // Default options are marked with *
   const response = await fetch(url, {
-    method: `${method}`, // *GET, POST, PUT, DELETE, etc.
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
     credentials: "same-origin", // include, *same-origin, omit
@@ -33,7 +33,7 @@ async function postData(url = "", data = {}, method = "POST") {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-const Change = ({ name, method, dest, type }) => {
+const CreateBlock = ({name}) => {
   const classes = useStyles();
 
   const [user, setuser] = useState(0);
@@ -48,13 +48,11 @@ const Change = ({ name, method, dest, type }) => {
 
   let submitTextfields = () => {
     if (typeof user === "object") {
-      postData(`http://localhost:9000/${type.toLowerCase()}${name}`, user, method).then(
-        (data) => {
-          console.log(data); // JSON data parsed by `data.json()` call
-          setstatus(data);
-          setOpen(true);
-        }
-      );
+      postData(`http://localhost:9000/create${name}`, user).then((data) => {
+        console.log(data); // JSON data parsed by `data.json()` call
+        setstatus(data);
+        setOpen(true);
+      });
     }
   };
 
@@ -66,35 +64,31 @@ const Change = ({ name, method, dest, type }) => {
   };
 
   return (
-    <Paper elevation={15} style={{ marginTop: "1rem" }}>
-      <React.Fragment>
-        <Paper elevation={6}>
-          <Typography variant="h6">
-            {type} {name}:
-          </Typography>
-        </Paper>
-        <form className={classes.root} noValidate autoComplete="off">
-          <TextField id="company_name" label="Name" onChange={onChange} />
-          <TextField id="contact_email" label="Email" onChange={onChange} />
-          <TextField id="contact_person" label="Person" onChange={onChange} />
-          <TextField id="contact_phone" label="Phone" onChange={onChange} />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginTop: "1rem" }}
-            onClick={submitTextfields}
-          >
-            Submit
-          </Button>
-        </form>
-        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success">
-            {status}
-          </Alert>
-        </Snackbar>
-      </React.Fragment>
-    </Paper>
+    <React.Fragment>
+      <Paper elevation={6}>
+        <Typography variant="h6">Create {name}:</Typography>
+      </Paper>
+      <form className={classes.root} noValidate autoComplete="off">
+        <TextField id="company_name" label="Name" onChange={onChange} />
+        <TextField id="contact_email" label="Email" onChange={onChange} />
+        <TextField id="contact_person" label="Person" onChange={onChange} />
+        <TextField id="contact_phone" label="Phone" onChange={onChange} />
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "1rem" }}
+          onClick={submitTextfields}
+        >
+          Submit
+        </Button>
+      </form>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          {status}
+        </Alert>
+      </Snackbar>
+    </React.Fragment>
   );
 };
 
-export default Change;
+export default CreateBlock;

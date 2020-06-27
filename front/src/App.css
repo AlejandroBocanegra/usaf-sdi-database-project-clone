@@ -22,3 +22,7 @@ form {
   text-align: left;
   margin-left: 1rem;
 }
+
+svg {
+  margin-right: 1rem;
+}
