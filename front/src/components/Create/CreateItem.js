@@ -16,21 +16,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 async function postData(url = "", data = {}) {
-  // Default options are marked with *
   const response = await fetch(url, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
+    method: "POST",
+    mode: "cors", 
+    cache: "no-cache",
+    credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
+    redirect: "follow", 
+    referrerPolicy: "no-referrer", 
+    body: JSON.stringify(data), 
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 const CreateItem = () => {
@@ -66,11 +64,11 @@ const CreateItem = () => {
   return (
     <React.Fragment>
       <Paper elevation={6}>
-        <Typography variant="h6">Create item:</Typography>
+        <Typography variant="h6">Create Item:</Typography>
       </Paper>
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="firstName" label="First Name" onChange={onChange} />
-        <TextField id="lastName" label="Last Name" onChange={onChange} />
+        <TextField id="name" label="Name" onChange={onChange} />
+        <TextField id="description" label="Description" onChange={onChange} />
         <Button
           variant="contained"
           color="primary"

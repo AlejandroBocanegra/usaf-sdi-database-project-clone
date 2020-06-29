@@ -8,7 +8,7 @@ import Create from "./components/Create/Create"
 import Read from "./components/Read/Read"
 import Update from "./components/Update/Update"
 import Delete from "./components/Delete/Delete"
-import Change from "./components/Change";
+// import Change from "./components/Change";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Read />
         <Update />
         <Delete />
-        <Change name="User" method="GET" type="Update"/>
+        {/* <Change name="User" method="GET" type="Update"/> */}
       </Container>
     </div>
   );
