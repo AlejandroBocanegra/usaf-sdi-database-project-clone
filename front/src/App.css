@@ -2,6 +2,9 @@
   text-align: center;
 }
 
+:root {
+  background-color: rgb(61, 60, 70);
+}
 
 .App-header {
   background-color: #282c34;

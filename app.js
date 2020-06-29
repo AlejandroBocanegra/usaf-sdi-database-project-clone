@@ -28,6 +28,7 @@ app.post("/", (req,res) => {
 */
 
 // Create
+app.post('/create/:type', db.create)
 app.post('/createUser', db.createUser);
 app.post('/createManufacturer', db.createManufacturer);
 app.post('/createCustomer', db.createCustomer);
@@ -35,20 +36,24 @@ app.post('/createPurchaseOrder', db.createPurchaseOrder);
 app.post('/createItem', db.createItem);
 
 // Read
+app.get('/read/:type', db.read)
 app.get('/getUsers', db.getUsers);
-app.get('/getManufacturers', db.getManfacturers);
+app.get('/getManufacturers', db.getManufacturers);
 
 // Update
+app.post('/update/:type', db.update)
 app.post('/updateUser', db.updateUser);
 app.post('/updateManufacturer', db.updateManufacturer);
-app.post('/updateCustomer', db.updateCustomer);
+app.post('/updateCustomer', db.updatePurchaseOrder);
 
 // Delete
-app.delete('/deleteUser', db.deleteUser);
+app.delete('/delete/:type', db.deleteCave)
+app.delete('/deleteUser/:id', db.deleteUser);
 app.delete('/deleteManufacturer', db.deleteManufacturer);
 app.delete('/deletePurchaseOrder', db.deletePurchaseOrder);
 
 // List
+app.get('/list/:caveType', db.list)
 app.get('/caveOfUsers', db.showUsersTable);
 app.get('/caveOfCustomers', db.showCustomersTable);
 app.get('/caveOfItems', db.showItemsTable);

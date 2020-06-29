@@ -6,6 +6,8 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ReadIcon from "@material-ui/icons/LocalLibrary"
+import ReadTable from "./ReadTable";
+import Paper from "@material-ui/core/Paper"
 
 function Read() {
   return (
@@ -23,6 +25,9 @@ function Read() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails style={{ display: "block" }}>
           {/* CONTENT */}
+          <Paper elevation={15} style={{ marginTop: "1rem" }}>
+            <ReadTable />
+          </Paper>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </React.Fragment>
