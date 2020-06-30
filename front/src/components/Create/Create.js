@@ -30,10 +30,13 @@ function Create() {
             <CreateUser />
           </Paper>
           <Paper elevation={15} style={{ marginTop: "1rem" }}>
-            <CreateBlock name="Manufacturer" />
+            <CreateBlock name="manufacturer" />
           </Paper>
           <Paper elevation={15} style={{ marginTop: "1rem" }}>
-            <CreateBlock name="Customer" />
+            <CreateBlock name="customer" />
+          </Paper>
+          <Paper elevation={15} style={{ marginTop: "1rem" }}>
+            <CreateBlock name="purchaseOrder"  />
           </Paper>
           <Paper elevation={15} style={{ marginTop: "1rem" }}>
             <CreateItem />

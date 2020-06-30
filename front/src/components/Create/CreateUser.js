@@ -48,7 +48,7 @@ const CreateUser = () => {
 
   let submitTextfields = () => {
     if (typeof user === "object") {
-      postData("http://localhost:9000/createUser", user).then((data) => {
+      postData("http://localhost:9000/create/user", user).then((data) => {
         console.log(data); // JSON data parsed by `data.json()` call
         setstatus(data)
         setOpen(true);

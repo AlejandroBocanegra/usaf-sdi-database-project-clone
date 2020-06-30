@@ -33,7 +33,7 @@ async function postData(url = "", data = {}) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-const CreateBlock = ({name}) => {
+const CreateBlock = ({ name }) => {
   const classes = useStyles();
 
   const [user, setuser] = useState(0);
@@ -48,7 +48,7 @@ const CreateBlock = ({name}) => {
 
   let submitTextfields = () => {
     if (typeof user === "object") {
-      postData(`http://localhost:9000/create${name}`, user).then((data) => {
+      postData(`http://localhost:9000/create/${name}`, user).then((data) => {
         console.log(data); // JSON data parsed by `data.json()` call
         setstatus(data);
         setOpen(true);
@@ -66,22 +66,41 @@ const CreateBlock = ({name}) => {
   return (
     <React.Fragment>
       <Paper elevation={6}>
-        <Typography variant="h6">Create {name}:</Typography>
+        <Typography variant="h6">Create {name[0].toUpperCase() + name.slice(1)}:</Typography>
       </Paper>
-      <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="company_name" label="Name" onChange={onChange} />
-        <TextField id="contact_email" label="Email" onChange={onChange} />
-        <TextField id="contact_person" label="Person" onChange={onChange} />
-        <TextField id="contact_phone" label="Phone" onChange={onChange} />
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ marginTop: "1rem" }}
-          onClick={submitTextfields}
-        >
-          Submit
-        </Button>
-      </form>
+      {name !== "purchaseOrder" && (
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField id="company_name" label="Name" onChange={onChange} />
+          <TextField id="contact_email" label="Email" onChange={onChange} />
+          <TextField id="contact_person" label="Person" onChange={onChange} />
+          <TextField id="contact_phone" label="Phone" onChange={onChange} />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginTop: "1rem" }}
+            onClick={submitTextfields}
+          >
+            Submit
+          </Button>
+        </form>
+      )}
+      {name === "purchaseOrder" && (
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField id="manufacturer_id" label="Manufacturer ID" onChange={onChange} />
+          <TextField id="date_ordered" label="Date Ordered" onChange={onChange} />
+          <TextField id="date_received" label="Date Received" onChange={onChange} />
+          <TextField id="customer_id" label="Customer ID" onChange={onChange} />
+          <TextField id="salesperson_id" label="Salesperson ID" onChange={onChange} />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginTop: "1rem" }}
+            onClick={submitTextfields}
+          >
+            Submit
+          </Button>
+        </form>
+      )}
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           {status}

@@ -18,7 +18,7 @@
 }
 
 .MuiFormControl-root {
-  width: 125px;
+  max-width: 120px;
 }
 
 form {

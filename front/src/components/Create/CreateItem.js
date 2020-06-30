@@ -68,7 +68,7 @@ const CreateItem = () => {
       </Paper>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField id="name" label="Name" onChange={onChange} />
-        <TextField id="description" label="Description" onChange={onChange} />
+        <TextField id="description" label="Description" onChange={onChange} style={{ minWidth: "300px"}} />
         <Button
           variant="contained"
           color="primary"
