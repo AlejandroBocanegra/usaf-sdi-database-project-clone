@@ -3,6 +3,9 @@ var bodyParser = require("body-parser");
 var cors = require("cors");
 const app = express();
 const db = require('./queries');
+const morgan = require('morgan');
+
+app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
@@ -47,6 +50,7 @@ app.delete('/delete/:type', db.deleteCave)
 
 // List
 app.get('/list/:caveType', db.list)
+app.use('/',express.static("./front/build"))
 // app.get('/caveOfUsers', db.showUsersTable);
 // app.get('/caveOfCustomers', db.showCustomersTable);
 // app.get('/caveOfItems', db.showItemsTable);

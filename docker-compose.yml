@@ -1,0 +1,23 @@
+version: "3"
+services:
+  webapp:
+    depends_on: 
+      - db
+    build: ./
+    networks: 
+      - myappnetwork
+    ports:
+      - "9001:9000"
+    deploy:
+      restart_policy:
+        condition: on-failure
+  db:
+    image: postgres:latest
+    networks:
+      - myappnetwork
+    environment:
+      POSTGRES_DB: commerce 
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+networks:
+  myappnetwork:
